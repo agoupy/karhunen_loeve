@@ -1,11 +1,11 @@
 % Parameters
 z_max=1e3;
 Z=linspace(1,z_max,1000)';
-corr_length=1000;
-N_terms=6;
+corr_length=500;
+N_terms=20;
 
 % K-L decomposition 
-terms=exponential(Z,N_terms,corr_length);
+terms=kl_exponential(Z,N_terms,corr_length);
 
 % Plot sample
 figure
