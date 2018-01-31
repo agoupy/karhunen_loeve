@@ -15,7 +15,6 @@ end
 P=poly1D(N_terms,'legendre');
 pol=zeros(L,N_terms);
 for i=1:N_terms
-    P{i}=sqrt(((i-1)+1)/2)*P{i};
     pol(:,i)=polyval(P{i},Z);
 end
 
