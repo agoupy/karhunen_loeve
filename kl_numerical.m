@@ -34,7 +34,7 @@ end
 
 % Find eigenvalues and functions
 [~,EV,EF]=eig(A,B);
-EV=diag(EV');
+EV=diag(EV);
 
 % Compute KL terms
 terms=zeros(L,N_terms);

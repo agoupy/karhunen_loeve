@@ -36,7 +36,6 @@ omegaoz=repmat(omegao,[L,1]);lambdaoz=repmat(lambdao,[L,1]);
 eventerms = @(z) sqrt(lambdaez).*sin(omegaez.*(z-H/2))./sqrt(H/2-sin(H*omegaez)./(2*omegaez));
 oddterms = @(z) sqrt(lambdaoz).*cos(omegaoz.*(z-H/2))./sqrt(H/2+sin(H*omegaoz)./(2*omegaoz));
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Correlation and error estimation
 terms=[oddterms(repmat(Z,1,N)) eventerms(repmat(Z,1,N))];

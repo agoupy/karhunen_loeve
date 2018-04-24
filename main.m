@@ -1,7 +1,7 @@
 % Parameters
 z_max=2;
 Z=linspace(0,z_max,1000)';
-corr_length=0.5;
+corr_length=1;
 N_terms=10;
 
 %% K-L decomposition 
