@@ -36,6 +36,7 @@ omegaoz=repmat(omegao,[L,1]);lambdaoz=repmat(lambdao,[L,1]);
 eventerms = @(z) sqrt(lambdaez).*sin(omegaez.*(z-H/2))./sqrt(H/2-sin(H*omegaez)./(2*omegaez));
 oddterms = @(z) sqrt(lambdaoz).*cos(omegaoz.*(z-H/2))./sqrt(H/2+sin(H*omegaoz)./(2*omegaoz));
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Correlation and error estimation
 terms=[oddterms(repmat(Z,1,N)) eventerms(repmat(Z,1,N))];
@@ -44,6 +45,6 @@ correl_theo=sig2*exp(-abs(Z*ones(1,L)-ones(L,1)*transpose(Z))./b); %correlation 
 err=max(max(abs(correl_emp-correl_theo))); %bound the error
 
 disp(['K-L decomposition with ' num2str(2*N) ' terms'])
-disp(['Error on the covariance function: ' num2str(err)])
+disp(['Truncation error on the covariance function: ' num2str(err)])
 
 end

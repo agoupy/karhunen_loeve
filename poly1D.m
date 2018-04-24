@@ -51,6 +51,9 @@ elseif strcmp(type,'legendre')
         for i=2:deg+1 %recurrence relation
             P{i+1}=1/i*([(2*i-1)*P{i} 0]-(i-1)*[0 0 P{i-1}]);
         end
+        for i=1:deg+2 %normalization in [-1 1]
+            P{i}=P{i}.*sqrt((2*i-1)/2);
+        end
     end
     
 else
