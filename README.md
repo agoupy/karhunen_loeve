@@ -11,6 +11,8 @@ by S. P. Huang, S. T. Quek and K. K. Phoon.
 
 The file `main.m` will execute the code for the exponential kernel and perform the comparison with exact decomposition.
 
+-------------------------------------
+
 The matrix M depends on two stochastic parameters ![f1] and ![f2]: ![f3] 
 
 The code will compute the gPC coefficients of eigenvalues (ev) and eigenvectors (ef) and return the mean and variance for the eigenvalues (computed with the gPC and quasi Monte-Carlo for comparison).
