@@ -1,24 +1,22 @@
 % Parameters
 z_max=2;
-Z=linspace(0,z_max,1000)';
+L=1000;
+Z=linspace(0,z_max,L)';
 corr_length=1;
-N_terms=10;
+N_terms=20;
 
 %% K-L decomposition 
 terms=kl_exponential(Z,N_terms,corr_length);
 terms_num= kl_numerical(Z,N_terms,corr_length,'exponential');
 
+correl_emp=(terms*transpose(terms)); %Correlation empirique
+correl_emp_num=(terms_num*transpose(terms_num)); %Correlation empirique
+correl_theo=exp(-abs(Z*ones(1,L)-ones(L,1)*transpose(Z))./corr_length); %correlation théorique
 
-%% Plot sample
-figure
-Xi=randn(size(terms,2),5);
-for i=1:5
-    plot(Z,terms*Xi(:,i))
-    hold on 
-end
+%% Plot correlation
+[XX,YY]=meshgrid(Z,Z);
 
-figure
-for i=1:5
-    plot(Z,terms_num*Xi(:,i))
-    hold on 
-end
+mesh(XX,YY,correl_theo)
+hold on
+mesh(XX,YY,correl_emp)
+mesh(XX,YY,correl_emp_num)
