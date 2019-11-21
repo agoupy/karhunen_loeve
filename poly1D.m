@@ -8,6 +8,7 @@ function [P]=poly1D(deg,type)
 %
 %Input: -deg: maximum degree
 %       -type: can be 'hermite-prob'
+%                  or 'hermite-prob-norm'
 %                  or 'hermite-phys'
 %                  or 'legendre'
 %
@@ -26,6 +27,18 @@ if strcmp(type,'hermite-prob')
         P{2}=[1 0];
         for i=2:deg+1 %recurrence relation
             P{i+1}=[P{i} 0]-(i-1)*[0 0 P{i-1}];
+        end
+    end
+    
+elseif strcmp(type,'hermite-prob-norm')
+    
+    if deg==0 
+        P{1}=1; 
+    else
+        P{1}=1;
+        P{2}=[1 0];
+        for i=2:deg+1 %recurrence relation
+            P{i+1}=[P{i}./sqrt(i) 0]-(i-1)*[0 0 P{i-1}./sqrt((i-1)*i)];
         end
     end
         
@@ -51,8 +64,8 @@ elseif strcmp(type,'legendre')
         for i=2:deg+1 %recurrence relation
             P{i+1}=1/i*([(2*i-1)*P{i} 0]-(i-1)*[0 0 P{i-1}]);
         end
-        for i=1:deg+2 %normalization in [-1 1]
-            P{i}=P{i}.*sqrt((2*i-1)/2);
+         for i=1:deg+2 %normalization
+            P{i}=P{i}./sqrt(2/(2*i-1));
         end
     end
     

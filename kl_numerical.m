@@ -2,8 +2,6 @@ function [terms] = kl_numerical (Z,N_terms,corr_length,type)
 
 b=corr_length;
 L=length(Z);
-a=Z(1);
-b=Z(end);
 Z=Z-1;
 
 % Type of covariance kernel
@@ -24,17 +22,19 @@ end
 % Compute matices A and B
 A=zeros(N_terms);
 B=zeros(N_terms);
+[XX,YY]=meshgrid(Z,Z);
 for i=1:N_terms
     for j=1:N_terms
-        [XX,YY]=meshgrid(Z,Z);
         A(i,j)=trapz(Z,trapz(Z,covar(XX,YY).*polyval(P{i},XX).*polyval(P{j},YY)));
         B(i,j)=trapz(Z,pol(:,i).*pol(:,j));
     end
 end
 
 % Find eigenvalues and functions
-[~,EV,EF]=eig(A,B);
-EV=diag(EV);
+% [~,EV,EF]=eig(A,B);
+% EV=diag(EV);
+[EF,D] = eig(A,B);
+EV=diag(B*EF*D/(B*EF));
 
 % Compute KL terms
 terms=zeros(L,N_terms);
